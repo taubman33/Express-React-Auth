@@ -1,10 +1,10 @@
 {
   "development": {
-    "database": "items_app_development",
+    "database": "express_react_auth_development",
     "dialect": "postgres"
   },
   "test": {
-    "database": "items_app_test",
+    "database": "express_react_auth_test",
     "dialect": "postgres"
   },
   "production": {
