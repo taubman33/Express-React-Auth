@@ -1,22 +1,81 @@
 
-import React from 'react'
+import React, { Component } from 'react'
 import { Route, withRouter } from 'react-router-dom'
+
+import AuthenticatedRoute from './components/routes/AuthenticatedRoute'
+import AutoDismissAlert from './components/routes/AutoDismissAlert/AutoDismissAlert'
+import Header from './components/routes/Header'
+import SignUp from './components/routes/SignUp'
+import SignIn from './components/routes/SignIn'
+import SignOut from './components/routes/SignOut'
+import ChangePassword from './components/routes/ChangePassword'
 
 import Items from './components/routes/Items'
 import Item from './components/routes/Item'
 import ItemEdit from './components/routes/ItemEdit'
 import ItemCreate from './components/routes/ItemCreate'
-import Home from './components/routes/Home'
 
-const App = props => (
-  <React.Fragment>
-    <h3>{props.location.state ? props.location.state.msg : null}</h3>
-    <Route exact path='/' component={Home} />
-    <Route exact path='/items' component={Items} />
-    <Route exact path='/create-item' component={ItemCreate} />
-    <Route exact path='/items/:id' component={Item} />
-    <Route exact path='/items/:id/edit' component={ItemEdit} />
-  </React.Fragment>
-)
+class App extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      user: null,
+      alerts: []
+    }
+  }
+
+  setUser = user => this.setState({ user })
+
+  clearUser = () => this.setState({ user: null })
+
+  alert = ({ heading, message, variant }) => {
+    this.setState({ alerts: [...this.state.alerts, { heading, message, variant }] })
+  }
+
+  render() {
+    const { alerts, user } = this.state
+
+    return (
+      <>
+        <Header user={user} />
+        {alerts.map((alert, index) => (
+          <AutoDismissAlert
+            key={index}
+            heading={alert.heading}
+            variant={alert.variant}
+            message={alert.message}
+          />
+        ))}
+        <main className="container">
+          <Route path='/sign-up' render={() => (
+            <SignUp alert={this.alert} setUser={this.setUser} />
+          )} />
+          <Route path='/sign-in' render={() => (
+            <SignIn alert={this.alert} setUser={this.setUser} />
+          )} />
+          <AuthenticatedRoute user={user} path='/items' render={() => (
+            <Items alert={this.alert} clearUser={this.clearUser} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/create-item' render={() => (
+            <ItemCreate alert={this.alert} clearUser={this.clearUser} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/items/:id' render={() => (
+            <Item alert={this.alert} clearUser={this.clearUser} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/items/:id/edit' render={() => (
+            <ItemEdit alert={this.alert} clearUser={this.clearUser} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/sign-out' render={() => (
+            <SignOut alert={this.alert} clearUser={this.clearUser} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/change-password' render={() => (
+            <ChangePassword alert={this.alert} user={user} />
+          )} />
+        </main>
+      </>
+    )
+  }
+}
 
 export default withRouter(App)
