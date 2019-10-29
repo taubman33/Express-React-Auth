@@ -1,31 +1,31 @@
 import apiUrl from '../apiConfig'
-import axios from 'axios'
 
-export const signUp = (credentials) => {
-	return axios({
-		method: 'POST',
-		url: apiUrl + '/sign-up',
-		data: {
-			credentials: {
-				email: credentials.email,
-				username: credentials.username,
-				password: credentials.password
-			}
-		}
-	})
+import Axios from 'axios'
+const JwtToken = localStorage.getItem('token') || null
+
+const api = Axios.create({
+	baseURL: apiUrl,
+	headers: {
+		Authorization: `Bearer ${JwtToken}`,
+		'Access-Control-Allow-Origin': '*'
+	}
+})
+
+export const signUp = async (credentials) => {
+	try {
+		const resp = await api.post('/sign-up', credentials)
+		return resp.data
+	} catch (error) {}
 }
 
-export const signInUser = (credentials) => {
-	return axios({
-		url: apiUrl + '/sign-in',
-		method: 'POST',
-		data: {
-			credentials: {
-				username: credentials.username,
-				password: credentials.password
-			}
-		}
-	})
+export const signInUser = async (credentials) => {
+	try {
+		const resp = await api.post('/sign-in', credentials)
+		localStorage.setItem('token', resp.data.token)
+		return resp.data
+	} catch (error) {
+		throw error
+	}
 }
 
 export const signOut = async (user) => {
@@ -37,18 +37,25 @@ export const signOut = async (user) => {
 	}
 }
 
-export const changePassword = (passwords, user) => {
-	return axios({
-		url: apiUrl + '/change-password',
-		method: 'PATCH',
-		headers: {
-			Authorization: `Token token=${user.token}`
-		},
-		data: {
-			passwords: {
-				old: passwords.oldPassword,
-				new: passwords.newPassword
-			}
-		}
-	})
+export const changePassword = async (passwords, user) => {
+	try {
+		const resp = await api.post('/')
+	} catch (error) {
+		throw error
+	}
+}
+
+export const getItems = async () => {
+	try {
+		const resp = await api.get('/items')
+		return resp.data
+	} catch (error) {
+		throw error
+	}
+}
+
+export const addItem = async () => {
+	try {
+		const resp = await api.post('/items')
+	} catch (error) {}
 }

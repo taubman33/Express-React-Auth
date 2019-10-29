@@ -22,7 +22,7 @@ class SignIn extends Component {
 		const { history, setUser } = this.props
 
 		signInUser(this.state)
-			.then((res) => setUser(res.data.user))
+			.then((res) => setUser(res.user))
 			.then(() => history.push('/'))
 			.catch((error) => {
 				console.error(error)
