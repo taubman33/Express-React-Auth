@@ -39,7 +39,7 @@ class SignUp extends Component {
 					variant: 'success'
 				})
 			)
-			.then(() => history.push('/'))
+			.then(() => history.push('/authenticated'))
 			.catch((error) => {
 				console.error(error)
 				this.setState({ email: '', password: '', passwordConfirmation: '' })

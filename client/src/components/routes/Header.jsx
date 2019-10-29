@@ -1,41 +1,34 @@
 import React, { Fragment } from 'react'
-import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
-
+import { NavLink } from 'react-router-dom'
+import Navbar from '../shared/Navbar.jsx'
+import Nav from '../shared/Nav'
 const authenticatedOptions = (
-  <Fragment>
-    <Nav.Link href="/change-password">Change Password</Nav.Link>
-    <Nav.Link href="/sign-out">Sign Out</Nav.Link>
-  </Fragment>
+	<Fragment>
+		<Nav />
+		<NavLink to='/change-password'>Change Password</NavLink>
+		<NavLink to='/sign-out'>Sign Out</NavLink>
+	</Fragment>
 )
 
 const unauthenticatedOptions = (
-  <Fragment>
-    <Nav.Link href="/sign-up">Sign Up</Nav.Link>
-    <Nav.Link href="/sign-in">Sign In</Nav.Link>
-  </Fragment>
+	<Fragment>
+		<NavLink to='/sign-up'>Sign Up</NavLink>
+		<NavLink to='/sign-in'>Sign In</NavLink>
+	</Fragment>
 )
 
 const alwaysOptions = (
-  <Fragment>
-    <Nav.Link to="/">Home</Nav.Link>
-  </Fragment>
+	<Fragment>
+		<NavLink to='/'>Home</NavLink>
+	</Fragment>
 )
 
 const Header = ({ user }) => (
-  <Navbar bg="primary" variant="dark" expand="md">
-    <Navbar.Brand href="/">
-      Learn Authentication
-    </Navbar.Brand>
-    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    <Navbar.Collapse id="basic-navbar-nav">
-      <Nav className="ml-auto">
-        { user && <span className="navbar-text mr-2">Welcome, {user.email}</span>}
-        { alwaysOptions }
-        { user ? authenticatedOptions : unauthenticatedOptions }
-      </Nav>
-    </Navbar.Collapse>
-  </Navbar>
+	<Navbar>
+		{user && <span className='navbar-text mr-2'>Welcome, {user.email}</span>}
+		{alwaysOptions}
+		{user ? authenticatedOptions : unauthenticatedOptions}
+	</Navbar>
 )
 
 export default Header

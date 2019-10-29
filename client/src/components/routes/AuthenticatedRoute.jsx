@@ -1,13 +1,19 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import auth from './Auth'
-const AuthenticatedRoute = ({ component: Component, children, ...rest }) => {
+const AuthenticatedRoute = ({
+	component: Component,
+	children,
+	user,
+	render,
+	...rest
+}) => {
 	return (
 		<Route
 			{...rest}
 			render={(props) => {
-				if (auth.isAuthenticated()) {
-					return <Component {...props} />
+				if (user && render) {
+					return <Route {...rest} render={render} />
 				} else {
 					return (
 						<Redirect

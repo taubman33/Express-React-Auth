@@ -1,11 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-
-import { signIn } from '../../services/auth'
-import messages from './AutoDismissAlert/messages'
-
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import { signInUser } from '../../services/auth'
 
 class SignIn extends Component {
 	constructor() {
@@ -25,26 +20,14 @@ class SignIn extends Component {
 	onSignIn = (event) => {
 		event.preventDefault()
 
-		const { alert, history, setUser } = this.props
+		const { history, setUser } = this.props
 
-		signIn(this.state)
-			.then((res) => setUser(res.data.user))
-			.then(() =>
-				alert({
-					heading: 'Sign In Success',
-					message: messages.signInSuccess,
-					variant: 'success'
-				})
-			)
-			.then(() => history.push('/'))
+		signInUser(this.state)
+			.then((res) => setUser(res.data.token))
+			.then(() => history.push('/authenticated'))
 			.catch((error) => {
 				console.error(error)
-				// this.setState({ username: '', password: '' })
-				alert({
-					heading: 'Sign In Failed',
-					message: messages.signInFailure,
-					variant: 'danger'
-				})
+				this.setState({ username: '', password: '' })
 			})
 	}
 
@@ -53,39 +36,35 @@ class SignIn extends Component {
 
 		return (
 			<div className='row'>
-				<div className='col-sm-10 col-md-8 mx-auto mt-5'>
+				<div className='form-container'>
 					<h3>Sign In</h3>
-					<Form onSubmit={this.onSignIn}>
-						<Form.Group controlId='username'>
-							<Form.Label>Username</Form.Label>
-							<Form.Control
-								required
-								type='text'
-								name='username'
-								value={username}
-								placeholder='Enter Username'
-								onChange={this.handleChange}
-							/>
-						</Form.Group>
-						<Form.Group controlId='password'>
-							<Form.Label>Password</Form.Label>
-							<Form.Control
-								required
-								name='password'
-								value={password}
-								type='password'
-								placeholder='Password'
-								onChange={this.handleChange}
-							/>
-						</Form.Group>
-						<Button variant='primary' type='submit'>
+					<form onSubmit={this.onSignIn}>
+						<label>Username</label>
+						<input
+							required
+							type='text'
+							name='username'
+							value={username}
+							placeholder='Enter Username'
+							onChange={this.handleChange}
+						/>
+						<label>Password</label>
+						<input
+							required
+							name='password'
+							value={password}
+							type='password'
+							placeholder='Password'
+							onChange={this.handleChange}
+						/>
+						<button variant='primary' type='submit'>
 							Submit
-						</Button>
-					</Form>
+						</button>
+					</form>
 				</div>
 			</div>
 		)
 	}
 }
 
-export default withRouter(SignIn)
+export default SignIn
