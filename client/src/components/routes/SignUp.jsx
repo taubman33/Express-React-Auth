@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
-
 import { signUp, signInUser } from '../../services/auth'
 
 class SignUp extends Component {
@@ -23,7 +21,7 @@ class SignUp extends Component {
 	onSignUp = (event) => {
 		event.preventDefault()
 
-		const { alert, history, setUser } = this.props
+		const { history, setUser } = this.props
 
 		signUp(this.state)
 			.then(() => signInUser(this.state))
@@ -40,7 +38,7 @@ class SignUp extends Component {
 
 		return (
 			<div className='row'>
-				<div className='col-sm-10 col-md-8 mx-auto mt-5'>
+				<div className='form-container'>
 					<h3>Sign Up</h3>
 					<form onSubmit={this.onSignUp}>
 						<label>Username</label>
@@ -89,4 +87,4 @@ class SignUp extends Component {
 	}
 }
 
-export default withRouter(SignUp)
+export default SignUp

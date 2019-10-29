@@ -3,31 +3,32 @@ import { NavLink } from 'react-router-dom'
 import Navbar from '../shared/Navbar.jsx'
 import Nav from '../shared/Nav'
 const authenticatedOptions = (
-	<Fragment>
-		<Nav />
+	<div className='links'>
 		<NavLink to='/change-password'>Change Password</NavLink>
-		<NavLink to='/sign-out'>Sign Out</NavLink>
-	</Fragment>
+		<NavLink to='/'>Sign Out</NavLink>
+	</div>
 )
 
 const unauthenticatedOptions = (
-	<Fragment>
+	<div className='links'>
 		<NavLink to='/sign-up'>Sign Up</NavLink>
 		<NavLink to='/sign-in'>Sign In</NavLink>
-	</Fragment>
+	</div>
 )
 
 const alwaysOptions = (
-	<Fragment>
+	<div className='links'>
 		<NavLink to='/'>Home</NavLink>
-	</Fragment>
+	</div>
 )
 
 const Header = ({ user }) => (
 	<Navbar>
-		{user && <span className='navbar-text mr-2'>Welcome, {user.email}</span>}
-		{alwaysOptions}
-		{user ? authenticatedOptions : unauthenticatedOptions}
+		{user && <span className='navbar-text'>Welcome, {user.email}</span>}
+		<div className='nav'>
+			{alwaysOptions}
+			{user ? authenticatedOptions : unauthenticatedOptions}
+		</div>
 	</Navbar>
 )
 

@@ -4,6 +4,7 @@ import Home from './components/routes/Home'
 import Header from './components/routes/Header'
 import AuthenticatedRoute from './components/routes/AuthenticatedRoute'
 import SignIn from './components/routes/SignIn'
+import SignOut from './components/routes/SignOut'
 import Landing from './components/routes/Landing'
 import Items from './components/routes/Items'
 import Item from './components/routes/Item'
@@ -36,7 +37,7 @@ class App extends Component {
 		console.log(user)
 		return (
 			<>
-				<Header />
+				<Header user={user} />
 				<main className='container'>
 					<Switch>
 						<Route
@@ -81,6 +82,18 @@ class App extends Component {
 									exact
 									path='/item/create'
 									render={() => <ItemCreate />}
+								/>
+							)}
+						/>
+						<AuthenticatedRoute
+							user={user}
+							render={() => (
+								<Route
+									exact
+									path='/sign-out'
+									render={(props) => (
+										<SignOut {...props} clearUser={this.clearUser} />
+									)}
 								/>
 							)}
 						/>
