@@ -4,10 +4,9 @@ import { signOut } from '../../services/auth'
 class SignOut extends Component {
 	componentDidMount() {
 		const { history, clearUser, user } = this.props
-
 		signOut(user)
 			.then(() => clearUser())
-			.then(() => history.push('/'))
+			.finally(() => history.push('/'))
 	}
 
 	render() {

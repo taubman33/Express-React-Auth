@@ -17,8 +17,7 @@ class App extends Component {
 		super()
 
 		this.state = {
-			user: null,
-			alerts: []
+			user: null
 		}
 	}
 
@@ -26,15 +25,9 @@ class App extends Component {
 
 	clearUser = () => this.setState({ user: null })
 
-	alert = ({ heading, message, variant }) => {
-		this.setState({
-			alerts: [...this.state.alerts, { heading, message, variant }]
-		})
-	}
-
 	render() {
-		const { alerts, user } = this.state
-		console.log(user)
+		const { user } = this.state
+		// console.log(user)
 		return (
 			<>
 				<Header user={user} />
@@ -53,49 +46,35 @@ class App extends Component {
 							path='/sign-up'
 							render={(props) => <SignUp {...props} setUser={this.setUser} />}
 						/>
-						<AuthenticatedRoute
-							user={user}
-							render={() => (
-								<Route exact path='/items' render={() => <Items />} />
+						<Route
+							exact
+							path='/sign-out'
+							render={(props) => (
+								<SignOut {...props} clearUser={this.clearUser} user={user} />
 							)}
 						/>
 						<AuthenticatedRoute
+							exact
+							path='/items'
 							user={user}
-							render={() => (
-								<Route exact path='/item/:id' render={() => <Item />} />
-							)}
+							render={() => <Items />}
+						/>
+						<AuthenticatedRoute
+							exact
+							path='/items/:id'
+							user={user}
+							render={() => <Item />}
+						/>
+						<AuthenticatedRoute
+							exact
+							user={user}
+							path='/item/:id/edit'
+							render={() => <ItemEdit />}
 						/>
 						<AuthenticatedRoute
 							user={user}
-							render={() => (
-								<Route
-									exact
-									path='/item/:id/edit'
-									render={() => <ItemEdit />}
-								/>
-							)}
-						/>
-						<AuthenticatedRoute
-							user={user}
-							render={() => (
-								<Route
-									exact
-									path='/item/create'
-									render={() => <ItemCreate />}
-								/>
-							)}
-						/>
-						<AuthenticatedRoute
-							user={user}
-							render={() => (
-								<Route
-									exact
-									path='/sign-out'
-									render={(props) => (
-										<SignOut {...props} clearUser={this.clearUser} />
-									)}
-								/>
-							)}
+							path='/create'
+							render={(props) => <ItemCreate {...props} />}
 						/>
 					</Switch>
 				</main>

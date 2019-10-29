@@ -28,14 +28,13 @@ export const signInUser = (credentials) => {
 	})
 }
 
-export const signOut = (user) => {
-	return axios({
-		url: apiUrl + '/sign-out',
-		method: 'DELETE',
-		headers: {
-			Authorization: `Token token=${user.token}`
-		}
-	})
+export const signOut = async (user) => {
+	try {
+		await localStorage.clear()
+		return true
+	} catch (error) {
+		throw error
+	}
 }
 
 export const changePassword = (passwords, user) => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Redirect, Switch } from 'react-router-dom'
 import auth from './Auth'
 const AuthenticatedRoute = ({
 	component: Component,
@@ -8,27 +8,19 @@ const AuthenticatedRoute = ({
 	render,
 	...rest
 }) => {
-	return (
-		<Route
-			{...rest}
-			render={(props) => {
-				if (user && render) {
-					return <Route {...rest} render={render} />
-				} else {
-					return (
-						<Redirect
-							to={{
-								pathname: '/',
-								state: {
-									from: props.location
-								}
-							}}
-						/>
-					)
+	console.log(rest)
+	if (user && render) {
+		return <Route {...rest} render={render} />
+	} else {
+		return (
+			<Route
+				{...rest}
+				render={(props) =>
+					user ? <Component {...props} /> : <Redirect to='/' />
 				}
-			}}
-		/>
-	)
+			/>
+		)
+	}
 }
 
 export default AuthenticatedRoute

@@ -4,6 +4,7 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: 'Montserrat';
+	overflow: hidden;
 }
 
 button {
@@ -25,6 +26,11 @@ button {
 	color: #f8f8f8;
 	text-decoration: none;
 	font-size: 1.1rem;
+	transition: all 0.4s ease;
+}
+
+.navbar .nav .links a:hover {
+	color: #ffccbc;
 }
 
 .navbar .nav {
@@ -38,7 +44,7 @@ button {
 	align-items: center;
 	margin-top: 3em;
 }
-.row .form-container {
+.form-container {
 	align-self: center;
 	padding: 1em;
 	width: 50%;
@@ -49,11 +55,11 @@ button {
 	box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.row .form-container h3 {
+.form-container h3 {
 	text-align: center;
 }
 
-.row .form-container form {
+.form-container form {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -62,14 +68,14 @@ button {
 	width: 80%;
 }
 
-.row .form-container form input {
+.form-container form input {
 	width: 100%;
 	padding: 0.6em 1em;
 	margin: 0.5em auto;
 	font-size: 1rem;
 }
 
-.row .form-container form button {
+.form-container form button {
 	width: 50%;
 	padding: 0.6em 1.2em;
 	font-size: 1rem;
@@ -80,6 +86,68 @@ button {
 	box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.row .form-container form label {
+.form-container form a {
+	margin: auto;
+}
+
+.form-container form label {
 	margin-top: 0.6em;
+}
+
+.layout {
+	display: flex;
+	flex-direction: column;
+	overflow-y: scroll;
+}
+
+.layout .content {
+	display: flex;
+	flex-direction: row;
+	position: relative;
+	flex: 1;
+}
+
+.layout .content nav {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex: 0.8;
+	height: 86vh;
+	z-index: 1000;
+	background: #e0e0e0;
+}
+
+.layout .content nav a {
+	text-decoration: none;
+	text-align: center;
+	padding: 1em 0;
+	font-size: 1.1rem;
+	width: 100%;
+	color: #333;
+	transition: all 0.4s ease;
+}
+
+.layout .content nav a:hover {
+	background: #616161;
+	color: #f8f8f8;
+}
+
+.layout .content nav a:first-of-type {
+	border-bottom: 2px solid #333;
+}
+
+.layout .content nav a:last-of-type {
+	border-bottom: 2px solid #333;
+}
+
+.layout .content .main {
+	flex: 3;
+	height: 85vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.layout footer {
+	background: #9e9e9e;
 }

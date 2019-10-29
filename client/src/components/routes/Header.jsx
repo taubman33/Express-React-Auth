@@ -5,7 +5,7 @@ import Nav from '../shared/Nav'
 const authenticatedOptions = (
 	<div className='links'>
 		<NavLink to='/change-password'>Change Password</NavLink>
-		<NavLink to='/'>Sign Out</NavLink>
+		<NavLink to='/sign-out'>Sign Out</NavLink>
 	</div>
 )
 
