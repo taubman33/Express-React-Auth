@@ -5,6 +5,11 @@ import Header from './components/routes/Header'
 import AuthenticatedRoute from './components/routes/AuthenticatedRoute'
 import SignIn from './components/routes/SignIn'
 import Landing from './components/routes/Landing'
+import Items from './components/routes/Items'
+import Item from './components/routes/Item'
+import ItemCreate from './components/routes/ItemCreate'
+import ItemEdit from './components/routes/ItemEdit'
+import SignUp from './components/routes/SignUp'
 
 class App extends Component {
 	constructor() {
@@ -43,12 +48,42 @@ class App extends Component {
 							path='/sign-in'
 							render={(props) => <SignIn {...props} setUser={this.setUser} />}
 						/>
-						{/* <AuthenticatedRoute
+						<Route
+							path='/sign-up'
+							render={(props) => <SignUp {...props} setUser={this.setUser} />}
+						/>
+						<AuthenticatedRoute
 							user={user}
 							render={() => (
-								<Route exact path='/authenticated' render={() => <Home />} />
+								<Route exact path='/items' render={() => <Items />} />
 							)}
-						/> */}
+						/>
+						<AuthenticatedRoute
+							user={user}
+							render={() => (
+								<Route exact path='/item/:id' render={() => <Item />} />
+							)}
+						/>
+						<AuthenticatedRoute
+							user={user}
+							render={() => (
+								<Route
+									exact
+									path='/item/:id/edit'
+									render={() => <ItemEdit />}
+								/>
+							)}
+						/>
+						<AuthenticatedRoute
+							user={user}
+							render={() => (
+								<Route
+									exact
+									path='/item/create'
+									render={() => <ItemCreate />}
+								/>
+							)}
+						/>
 					</Switch>
 				</main>
 			</>
