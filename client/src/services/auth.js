@@ -16,9 +16,8 @@ export const signUp = (credentials) => {
 }
 
 export const signIn = (credentials) => {
-	console.log(credentials)
 	return axios({
-		url: 'http://localhost:3000/api/sign-in',
+		url: apiUrl + '/sign-in',
 		method: 'POST',
 		data: {
 			credentials: {

@@ -9,13 +9,11 @@ const signUp = async (req, res) => {
 	try {
 		const { username, email, password } = req.body.credentials
 		const password_digest = await bcrypt.hash(password, SALT_ROUNDS)
-
 		const user = await User.create({
 			username,
 			email,
 			password_digest
 		})
-
 		const payload = {
 			id: user.id,
 			username: user.username,
