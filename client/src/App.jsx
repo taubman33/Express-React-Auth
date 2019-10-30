@@ -2,15 +2,11 @@ import React, { Component } from 'react'
 import { Route, withRouter, Switch } from 'react-router-dom'
 import Home from './components/routes/Home'
 import Header from './components/routes/Header'
-import AuthenticatedRoute from './components/routes/AuthenticatedRoute'
 import SignIn from './components/routes/SignIn'
 import SignOut from './components/routes/SignOut'
 import Landing from './components/routes/Landing'
-import Items from './components/routes/Items'
-import Item from './components/routes/Item'
-import ItemCreate from './components/routes/ItemCreate'
-import ItemEdit from './components/routes/ItemEdit'
 import SignUp from './components/routes/SignUp'
+import AuthContainer from './components/routes/AuthContainer'
 
 class App extends Component {
 	constructor() {
@@ -53,29 +49,7 @@ class App extends Component {
 								<SignOut {...props} clearUser={this.clearUser} user={user} />
 							)}
 						/>
-						<AuthenticatedRoute
-							exact
-							path='/items'
-							user={user}
-							render={(props) => <Items {...props} />}
-						/>
-						<AuthenticatedRoute
-							exact
-							path='/items/:id'
-							user={user}
-							render={(props) => <Item {...props} />}
-						/>
-						<AuthenticatedRoute
-							exact
-							user={user}
-							path='/items/:id/edit'
-							render={(props) => <ItemEdit {...props} />}
-						/>
-						<AuthenticatedRoute
-							user={user}
-							path='/create'
-							render={(props) => <ItemCreate {...props} />}
-						/>
+						<AuthContainer user={user} />
 					</Switch>
 				</main>
 			</>

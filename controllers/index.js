@@ -27,7 +27,7 @@ const signUp = async (req, res) => {
 		console.log(
 			'You made it to the signUp controller, but there was an error :('
 		)
-		return res.status(500).json({ error: error.message })
+		return res.status(400).json({ error: error.message })
 	}
 }
 
