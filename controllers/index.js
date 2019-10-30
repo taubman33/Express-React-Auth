@@ -7,7 +7,8 @@ const TOKEN_KEY = 'areallylonggoodkey'
 
 const signUp = async (req, res) => {
 	try {
-		const { username, email, password } = req.body.credentials
+		console.log(req.body)
+		const { username, email, password } = req.body
 		const password_digest = await bcrypt.hash(password, SALT_ROUNDS)
 		const user = await User.create({
 			username,
@@ -32,7 +33,8 @@ const signUp = async (req, res) => {
 
 const signIn = async (req, res) => {
 	try {
-		const { username, password } = req.body.credentials
+		console.log(req.body)
+		const { username, password } = req.body
 		const user = await User.findOne({
 			where: {
 				username
@@ -60,14 +62,15 @@ const changePassword = async (req, res) => {}
 const createItem = async (req, res) => {
 	try {
 		console.log('req.body:', req.body)
-		const { item } = req.body
-		const createdItem = await Item.create(item)
+		const createdItem = await Item.create(req.body)
+
 		return res.status(201).json({
 			item: {
 				createdItem
 			}
 		})
 	} catch (error) {
+		console.log(error)
 		return res.status(500).json({ error: error.message })
 	}
 }

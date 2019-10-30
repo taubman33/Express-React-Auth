@@ -25,11 +25,11 @@ class SignUp extends Component {
 
 		signUp(this.state)
 			.then(() => signInUser(this.state))
-			.then((res) => setUser(res.data.user))
+			.then((res) => setUser(res.user))
 			.then(() => history.push('/'))
 			.catch((error) => {
 				console.error(error)
-				this.setState({ email: '', password: '', passwordConfirmation: '' })
+				// this.setState({ email: '', password: '', passwordConfirmation: '' })
 			})
 	}
 

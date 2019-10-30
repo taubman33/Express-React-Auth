@@ -4,60 +4,77 @@ import axios from 'axios'
 
 import apiUrl from '../../apiConfig'
 import Layout from '../shared/Layout'
+import { getItemById, deleteItem } from '../../services/auth'
 
 class Item extends Component {
-  constructor(props) {
-    super(props)
+	constructor(props) {
+		super(props)
 
-    this.state = {
-      item: null,
-      deleted: false
-    }
-  }
+		this.state = {
+			item: null,
+			deleted: false
+		}
+	}
 
-  async componentDidMount() {
-    try {
-      const response = await axios(`${apiUrl}/items/${this.props.match.params.id}`)
-      this.setState({ item: response.data.item })
-    } catch (err) {
-      console.error(err)
-    }
-  }
+	async componentDidMount() {
+		try {
+			const item = await getItemById(this.props.match.params.id)
+			this.setState({ item })
+		} catch (err) {
+			console.error(err)
+		}
+	}
 
-  destroy = () => {
-    axios({
-      url: `${apiUrl}/items/${this.props.match.params.id}`,
-      method: 'DELETE'
-    })
-      .then(() => this.setState({ deleted: true }))
-      .catch(console.error)
-  }
+	destroy = () => {
+		deleteItem(this.state.item.id)
+			.then(() => this.setState({ deleted: true }))
+			.catch(console.error)
+	}
 
-  render() {
-    const { item, deleted } = this.state
+	render() {
+		const { item, deleted } = this.state
 
-    if (!item) {
-      return <p>Loading...</p>
-    }
+		if (!item) {
+			return <p>Loading...</p>
+		}
 
-    if (deleted) {
-      return <Redirect to={
-        { pathname: '/', state: { msg: 'Item succesfully deleted!' } }
-      } />
-    }
+		if (deleted) {
+			return (
+				<Redirect
+					to={{
+						pathname: '/items',
+						state: { msg: 'Item succesfully deleted!' }
+					}}
+				/>
+			)
+		}
 
-    return (
-      <Layout>
-        <h4>{item.title}</h4>
-        <p>Link: {item.link}</p>
-        <button onClick={this.destroy}>Delete Item</button>
-        <Link to={`/items/${this.props.match.params.id}/edit`}>
-          <button>Edit</button>
-        </Link>
-        <Link to="/items">Back to all items</Link>
-      </Layout>
-    )
-  }
+		return (
+			<Layout>
+				<div className='item'>
+					<Link to='/items'>
+						<span> Back to all items</span>
+					</Link>
+					<h4>{item.title}</h4>
+					<p>Link: {item.link}</p>
+					<div className='buttons'>
+						<button className='danger' onClick={this.destroy}>
+							Delete Item
+						</button>
+						<button
+							className='edit'
+							onClick={() =>
+								this.props.history.push(
+									`/items/${this.props.match.params.id}/edit`
+								)
+							}>
+							Edit
+						</button>
+					</div>
+				</div>
+			</Layout>
+		)
+	}
 }
 
 export default Item

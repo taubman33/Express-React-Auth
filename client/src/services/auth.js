@@ -14,8 +14,11 @@ const api = Axios.create({
 export const signUp = async (credentials) => {
 	try {
 		const resp = await api.post('/sign-up', credentials)
+		localStorage.setItem('token', resp.data.token)
 		return resp.data
-	} catch (error) {}
+	} catch (error) {
+		throw error
+	}
 }
 
 export const signInUser = async (credentials) => {
@@ -48,14 +51,44 @@ export const changePassword = async (passwords, user) => {
 export const getItems = async () => {
 	try {
 		const resp = await api.get('/items')
+		return resp.data.items
+	} catch (error) {
+		throw error
+	}
+}
+
+export const getItemById = async (id) => {
+	try {
+		const resp = await api.get(`/items/${id}`)
+		return resp.data.item
+	} catch (error) {
+		throw error
+	}
+}
+
+export const addItem = async (item) => {
+	try {
+		const resp = await api.post('/items', item)
 		return resp.data
 	} catch (error) {
 		throw error
 	}
 }
 
-export const addItem = async () => {
+export const updateItem = async (id, item) => {
 	try {
-		const resp = await api.post('/items')
-	} catch (error) {}
+		const resp = await api.put(`'/items/${id}`, item)
+		return resp.data
+	} catch (error) {
+		throw error
+	}
+}
+
+export const deleteItem = async (id) => {
+	try {
+		const resp = await api.delete(`/items/${id}`)
+		return resp.data
+	} catch (error) {
+		throw error
+	}
 }

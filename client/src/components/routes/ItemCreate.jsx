@@ -5,6 +5,7 @@ import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import ItemForm from '../shared/ItemForm'
 import Layout from '../shared/Layout'
+import { addItem } from '../../services/auth'
 
 class ItemCreate extends Component {
 	constructor(props) {
@@ -30,12 +31,8 @@ class ItemCreate extends Component {
 	handleSubmit = (event) => {
 		event.preventDefault()
 
-		axios({
-			url: `${apiUrl}/items`,
-			method: 'POST',
-			data: { item: this.state.item }
-		})
-			.then((res) => this.setState({ createdItem: res.data.item }))
+		addItem(this.state.item)
+			.then((res) => this.setState({ createdItem: res.item }))
 			.catch(console.error)
 	}
 

@@ -57,19 +57,19 @@ class App extends Component {
 							exact
 							path='/items'
 							user={user}
-							render={() => <Items />}
+							render={(props) => <Items {...props} />}
 						/>
 						<AuthenticatedRoute
 							exact
 							path='/items/:id'
 							user={user}
-							render={() => <Item />}
+							render={(props) => <Item {...props} />}
 						/>
 						<AuthenticatedRoute
 							exact
 							user={user}
-							path='/item/:id/edit'
-							render={() => <ItemEdit />}
+							path='/items/:id/edit'
+							render={(props) => <ItemEdit {...props} />}
 						/>
 						<AuthenticatedRoute
 							user={user}
