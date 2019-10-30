@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
-import axios from 'axios'
-
-import apiUrl from '../../apiConfig'
 import ItemForm from '../shared/ItemForm'
 import Layout from '../shared/Layout'
 import { getItemById, updateItem } from '../../services/items'
@@ -22,7 +19,7 @@ class ItemEdit extends Component {
 
 	async componentDidMount() {
 		try {
-			const item = getItemById(this.props.match.params.id)
+			const item = await getItemById(this.props.match.params.id)
 			this.setState({ item })
 		} catch (err) {
 			console.error(err)
