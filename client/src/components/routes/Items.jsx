@@ -11,14 +11,16 @@ class Items extends Component {
 	}
 
 	async componentDidMount() {
+		console.log(this.props)
 		try {
-			const items = await getItems()
-			this.setState({ items })
+			if (!this.props.items) {
+				const items = await getItems()
+				this.setState({ items })
+			}
 		} catch (err) {
 			console.error(err)
 		}
 	}
-
 	renderButton = (id) => {
 		const { history, match } = this.props
 		if (this.props.user) {
@@ -33,6 +35,16 @@ class Items extends Component {
 	}
 
 	renderItems = () => {
+		if (this.props.items) {
+			return this.props.items.map((item) => {
+				return (
+					<div className='item' key={item.id}>
+						<h4>{item.title}</h4>
+						{this.renderButton(item.id)}
+					</div>
+				)
+			})
+		}
 		if (this.state.items.length) {
 			return this.state.items.map((item) => {
 				return (
@@ -52,7 +64,7 @@ class Items extends Component {
 			return (
 				<Layout>
 					<h4>Items</h4>
-					{this.state.items.length === 0 ? (
+					{!this.props.items && !this.state.items.length ? (
 						<h3>No Items at this time.</h3>
 					) : null}
 					<div className='item-container'>{this.renderItems()}</div>
@@ -60,10 +72,10 @@ class Items extends Component {
 			)
 		} else {
 			return (
-				<div className='container'>
+				<div className='landing'>
 					<h2>Welcome to the Items App!</h2>
 					<div className='main'>
-						{this.state.items.length === 0 ? (
+						{!this.props.items && !this.state.items.length ? (
 							<h3>No Items at this time.</h3>
 						) : null}
 						<div className='item-container'>{this.renderItems()}</div>

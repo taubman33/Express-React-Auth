@@ -6,8 +6,7 @@ import SignIn from './components/routes/SignIn'
 import SignOut from './components/routes/SignOut'
 import Landing from './components/routes/Landing'
 import SignUp from './components/routes/SignUp'
-import AuthContainer from './components/routes/AuthContainer'
-import Item from './components/routes/Item'
+import AuthRoutesContainer from './components/routes/AuthRoutesContainer'
 
 class App extends Component {
 	constructor() {
@@ -24,7 +23,6 @@ class App extends Component {
 
 	render() {
 		const { user } = this.state
-		// console.log(user)
 		return (
 			<>
 				<Header user={user} />
@@ -50,7 +48,7 @@ class App extends Component {
 								<SignOut {...props} clearUser={this.clearUser} user={user} />
 							)}
 						/>
-						<AuthContainer user={user} />
+						<AuthRoutesContainer user={user} />
 					</Switch>
 				</main>
 			</>

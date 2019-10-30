@@ -18,7 +18,7 @@ export const getItemById = async (id) => {
 	}
 }
 
-export const addItem = async (item) => {
+export const createItem = async (item) => {
 	try {
 		const resp = await api.post('/items', item)
 		return resp.data

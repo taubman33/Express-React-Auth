@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const controllers = require('../controllers')
 const router = Router()
-const restrict = require('../tools')
+const restrict = require('../helpers')
 
 router.get('/', (req, res) => res.send('This is root!'))
 
