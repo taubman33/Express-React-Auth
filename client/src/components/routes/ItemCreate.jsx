@@ -29,7 +29,11 @@ class ItemCreate extends Component {
 		event.preventDefault()
 		this.props.addItem(this.state.item)
 		createItem(this.state.item)
-			.then((res) => this.setState({ createdItem: res.item }))
+			.then((res) =>
+				res.status === 201
+					? this.setState({ createdItem: res.data.item })
+					: null
+			)
 			.catch(console.error)
 	}
 

@@ -140,9 +140,9 @@ button {
 	flex-direction: column;
 	align-items: center;
 	flex: 0.8 1;
-	/* height: 100%; */
 	z-index: 1000;
-	background: #e0e0e0;
+	background: #f8f8f8;
+	box-shadow: inset -10px 8px 10px -6px rgba(0, 0, 0, 0.3);
 }
 
 .layout .content nav a {
@@ -187,6 +187,7 @@ button {
 	grid-gap: 2em;
 	grid-template-rows: auto;
 	width: 80%;
+	padding: 2em 0;
 }
 
 .item {
