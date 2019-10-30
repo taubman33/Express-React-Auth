@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 import Navbar from '../shared/Navbar.jsx'
-import Nav from '../shared/Nav'
+
 const authenticatedOptions = (
 	<div className='links'>
 		<NavLink to='/change-password'>Change Password</NavLink>

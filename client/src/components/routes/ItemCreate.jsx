@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
-import axios from 'axios'
-
-import apiUrl from '../../apiConfig'
 import ItemForm from '../shared/ItemForm'
 import Layout from '../shared/Layout'
-import { addItem } from '../../services/auth'
+import { addItem } from '../../services/items'
 
 class ItemCreate extends Component {
 	constructor(props) {

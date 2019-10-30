@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Layout from '../shared/Layout'
-import { getItems } from '../../services/auth'
+import { getItems } from '../../services/items'
 
 class Items extends Component {
 	constructor(props) {
@@ -33,11 +33,7 @@ class Items extends Component {
 				)
 			})
 		} else {
-			return (
-				<div className='item'>
-					<h3>No Items at this time.</h3>
-				</div>
-			)
+			return null
 		}
 	}
 
@@ -45,6 +41,7 @@ class Items extends Component {
 		return (
 			<Layout>
 				<h4>Items</h4>
+				{this.state.items.length === 0 ? <h3>No Items at this time.</h3> : null}
 				<div className='item-container'>{this.renderItems()}</div>
 			</Layout>
 		)

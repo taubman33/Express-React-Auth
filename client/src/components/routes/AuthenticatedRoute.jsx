@@ -1,6 +1,5 @@
 import React from 'react'
-import { Route, Redirect, Switch } from 'react-router-dom'
-import auth from './Auth'
+import { Route, Redirect } from 'react-router-dom'
 const AuthenticatedRoute = ({
 	component: Component,
 	children,
@@ -8,7 +7,6 @@ const AuthenticatedRoute = ({
 	render,
 	...rest
 }) => {
-	console.log(rest)
 	if (user && render) {
 		return <Route {...rest} render={render} />
 	} else {

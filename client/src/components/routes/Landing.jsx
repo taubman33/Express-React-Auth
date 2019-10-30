@@ -1,5 +1,4 @@
 import React from 'react'
-import Alert from '../shared/Alert'
 
 const Landing = () => (
 	<div className='container landing'>

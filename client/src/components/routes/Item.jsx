@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
-import axios from 'axios'
-
-import apiUrl from '../../apiConfig'
 import Layout from '../shared/Layout'
-import { getItemById, deleteItem } from '../../services/auth'
+import { getItemById, deleteItem } from '../../services/items'
 
 class Item extends Component {
 	constructor(props) {

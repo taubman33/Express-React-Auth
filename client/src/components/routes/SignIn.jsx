@@ -54,7 +54,7 @@ class SignIn extends Component {
 	}
 
 	render() {
-		const { username, password, isError } = this.state
+		const { username, password } = this.state
 
 		return (
 			<div className='row'>
