@@ -1,8 +1,9 @@
 import React from 'react'
+import Items from './Items'
 
-const Landing = () => (
+const Landing = (props) => (
 	<div className='container landing'>
-		<h2>Items!</h2>
+		<Items {...props} />
 	</div>
 )
 export default Landing

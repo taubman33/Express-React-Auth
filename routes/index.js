@@ -9,7 +9,7 @@ router.post('/sign-up', controllers.signUp)
 router.post('/sign-in', controllers.signIn)
 router.post('/change-password', controllers.changePassword)
 
-router.get('/items', restrict, controllers.getAllItems)
+router.get('/items', controllers.getAllItems)
 router.get('/items/:id', controllers.getItemById)
 router.post('/items', restrict, controllers.createItem)
 router.put('/items/:id', restrict, controllers.updateItem)

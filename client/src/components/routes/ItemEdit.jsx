@@ -51,14 +51,14 @@ class ItemEdit extends Component {
 		}
 
 		return (
-			<Layout>
+			<>
 				<ItemForm
 					item={item}
 					handleChange={handleChange}
 					handleSubmit={handleSubmit}
 					cancelPath={`/items/${this.props.match.params.id}`}
 				/>
-			</Layout>
+			</>
 		)
 	}
 }

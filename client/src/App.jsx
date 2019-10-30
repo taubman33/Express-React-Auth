@@ -7,6 +7,7 @@ import SignOut from './components/routes/SignOut'
 import Landing from './components/routes/Landing'
 import SignUp from './components/routes/SignUp'
 import AuthContainer from './components/routes/AuthContainer'
+import Item from './components/routes/Item'
 
 class App extends Component {
 	constructor() {
@@ -32,7 +33,7 @@ class App extends Component {
 						<Route
 							exact
 							path='/'
-							render={user ? () => <Home /> : () => <Landing />}
+							render={(props) => (user ? <Home /> : <Landing {...props} />)}
 						/>
 						<Route
 							path='/sign-in'

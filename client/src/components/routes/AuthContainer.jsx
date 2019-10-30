@@ -14,7 +14,7 @@ export default class AuthContainer extends Component {
 					exact
 					path='/items'
 					user={user}
-					render={(props) => <Items {...props} />}
+					render={(props) => <Items {...props} user={user} />}
 				/>
 				<AuthenticatedRoute
 					exact

@@ -19,16 +19,26 @@ class Items extends Component {
 		}
 	}
 
+	renderButton = (id) => {
+		const { history, match } = this.props
+		if (this.props.user) {
+			return (
+				<button onClick={() => history.push(`${match.url}/${id}`)}>
+					See More
+				</button>
+			)
+		} else {
+			return null
+		}
+	}
+
 	renderItems = () => {
-		const { history } = this.props
 		if (this.state.items.length) {
 			return this.state.items.map((item) => {
 				return (
 					<div className='item' key={item.id}>
 						<h4>{item.title}</h4>
-						<button onClick={() => history.push(`/items/${item.id}`)}>
-							See More
-						</button>
+						{this.renderButton(item.id)}
 					</div>
 				)
 			})
@@ -38,13 +48,29 @@ class Items extends Component {
 	}
 
 	render() {
-		return (
-			<Layout>
-				<h4>Items</h4>
-				{this.state.items.length === 0 ? <h3>No Items at this time.</h3> : null}
-				<div className='item-container'>{this.renderItems()}</div>
-			</Layout>
-		)
+		if (this.props.user) {
+			return (
+				<Layout>
+					<h4>Items</h4>
+					{this.state.items.length === 0 ? (
+						<h3>No Items at this time.</h3>
+					) : null}
+					<div className='item-container'>{this.renderItems()}</div>
+				</Layout>
+			)
+		} else {
+			return (
+				<div className='container'>
+					<h2>Welcome to the Items App!</h2>
+					<div className='main'>
+						{this.state.items.length === 0 ? (
+							<h3>No Items at this time.</h3>
+						) : null}
+						<div className='item-container'>{this.renderItems()}</div>
+					</div>
+				</div>
+			)
+		}
 	}
 }
 
