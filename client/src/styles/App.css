@@ -63,6 +63,11 @@ button {
 	border: 2px solid #b0bec5;
 	border-radius: 6px;
 	box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
+	transition: all 2s ease;
+}
+
+.form-container .danger {
+	background: #e57373;
 }
 
 .form-container h3 {
@@ -242,6 +247,12 @@ button {
 	background: #e57373;
 }
 
+.error {
+	text-align: center;
+	color: #e57373;
+	font-size: 1.1rem;
+}
+
 .edit {
 	background: #b2dfdb;
 }
@@ -285,6 +296,7 @@ button {
 }
 
 .alert p {
+	color: #388e3c;
 	width: 80%;
 	margin: auto;
 	align-self: center;

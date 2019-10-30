@@ -9,13 +9,17 @@ class SignUp extends Component {
 			username: '',
 			email: '',
 			password: '',
-			passwordConfirmation: ''
+			passwordConfirmation: '',
+			isError: false,
+			errorMsg: ''
 		}
 	}
 
 	handleChange = (event) =>
 		this.setState({
-			[event.target.name]: event.target.value
+			[event.target.name]: event.target.value,
+			isError: false,
+			errorMsg: ''
 		})
 
 	onSignUp = (event) => {
@@ -29,8 +33,27 @@ class SignUp extends Component {
 			.then(() => history.push('/'))
 			.catch((error) => {
 				console.error(error)
-				// this.setState({ email: '', password: '', passwordConfirmation: '' })
+				this.setState({
+					email: '',
+					password: '',
+					passwordConfirmation: '',
+					isError: true,
+					errorMsg: 'Sign Up Details Invalid'
+				})
 			})
+	}
+
+	renderError = () => {
+		const toggleForm = this.state.isError ? 'danger' : ''
+		if (this.state.isError) {
+			return (
+				<button type='submit' className={toggleForm}>
+					{this.state.errorMsg}
+				</button>
+			)
+		} else {
+			return <button type='submit'>Sign In</button>
+		}
 	}
 
 	render() {
@@ -77,9 +100,7 @@ class SignUp extends Component {
 							placeholder='Confirm Password'
 							onChange={this.handleChange}
 						/>
-						<button variant='primary' type='submit'>
-							Submit
-						</button>
+						{this.renderError()}
 					</form>
 				</div>
 			</div>

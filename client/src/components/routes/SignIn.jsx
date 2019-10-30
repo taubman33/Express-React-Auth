@@ -7,14 +7,19 @@ class SignIn extends Component {
 
 		this.state = {
 			username: '',
-			password: ''
+			password: '',
+			isError: false,
+			errorMsg: ''
 		}
 	}
 
-	handleChange = (event) =>
+	handleChange = (event) => {
 		this.setState({
-			[event.target.name]: event.target.value
+			[event.target.name]: event.target.value,
+			isError: false,
+			errorMsg: ''
 		})
+	}
 
 	onSignIn = (event) => {
 		event.preventDefault()
@@ -26,12 +31,30 @@ class SignIn extends Component {
 			.then(() => history.push('/'))
 			.catch((error) => {
 				console.error(error)
-				this.setState({ username: '', password: '' })
+				this.setState({
+					isError: true,
+					errorMsg: 'Invalid Credentials',
+					username: '',
+					password: ''
+				})
 			})
 	}
 
+	renderError = () => {
+		const toggleForm = this.state.isError ? 'danger' : ''
+		if (this.state.isError) {
+			return (
+				<button type='submit' className={toggleForm}>
+					{this.state.errorMsg}
+				</button>
+			)
+		} else {
+			return <button type='submit'>Sign In</button>
+		}
+	}
+
 	render() {
-		const { username, password } = this.state
+		const { username, password, isError } = this.state
 
 		return (
 			<div className='row'>
@@ -56,9 +79,7 @@ class SignIn extends Component {
 							placeholder='Password'
 							onChange={this.handleChange}
 						/>
-						<button variant='primary' type='submit'>
-							Submit
-						</button>
+						{this.renderError()}
 					</form>
 				</div>
 			</div>
