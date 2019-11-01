@@ -108,7 +108,7 @@ const updateItem = async (req, res) => {
 		})
 		if (updated) {
 			const updatedItem = await Item.findOne({ where: { id: id } })
-			return res.status(200).json({ item: updatedItem })
+			return res.status(202).json({ item: updatedItem })
 		}
 		throw new Error('Item not found')
 	} catch (error) {
@@ -123,7 +123,7 @@ const deleteItem = async (req, res) => {
 			where: { id: id }
 		})
 		if (deleted) {
-			return res.status(200).send('Item deleted')
+			return res.status(202).send('Item deleted')
 		}
 		throw new Error('Item not found')
 	} catch (error) {

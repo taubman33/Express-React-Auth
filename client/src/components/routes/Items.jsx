@@ -34,7 +34,7 @@ export default function Items(props) {
 		return (
 			<Layout>
 				<h4>Items</h4>
-				{!items ? <h3>No Items at time.</h3> : null}
+				{!items ? <h3>No Items at this time.</h3> : null}
 				<div className='item-container'>{renderItems()}</div>
 			</Layout>
 		)
@@ -43,7 +43,7 @@ export default function Items(props) {
 			<div className='landing'>
 				<h2>Welcome to the Items App!</h2>
 				<div className='main'>
-					{!items ? <h3>No Items at time.</h3> : null}
+					{!items ? <h3>No Items at this time.</h3> : null}
 					<div className='item-container'>{renderItems()}</div>
 				</div>
 			</div>
