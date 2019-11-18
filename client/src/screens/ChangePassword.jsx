@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-
 import { changePassword } from '../../services/auth'
 import messages from './AutoDismissAlert/messages'
-
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 class ChangePassword extends Component {
-  constructor () {
+  constructor() {
     super()
 
     this.state = {
@@ -17,9 +15,10 @@ class ChangePassword extends Component {
     }
   }
 
-  handleChange = event => this.setState({
-    [event.target.name]: event.target.value
-  })
+  handleChange = event =>
+    this.setState({
+      [event.target.name]: event.target.value
+    })
 
   onChangePassword = event => {
     event.preventDefault()
@@ -27,11 +26,13 @@ class ChangePassword extends Component {
     const { alert, history, user } = this.props
 
     changePassword(this.state, user)
-      .then(() => alert({
-        heading: 'Change Password Success',
-        message: messages.changePasswordSuccess,
-        variant: 'success'
-      }))
+      .then(() =>
+        alert({
+          heading: 'Change Password Success',
+          message: messages.changePasswordSuccess,
+          variant: 'success'
+        })
+      )
       .then(() => history.push('/'))
       .catch(error => {
         console.error(error)
@@ -44,7 +45,7 @@ class ChangePassword extends Component {
       })
   }
 
-  render () {
+  render() {
     const { oldPassword, newPassword } = this.state
 
     return (
@@ -74,10 +75,7 @@ class ChangePassword extends Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
-            <Button
-              variant="primary"
-              type="submit"
-            >
+            <Button variant="primary" type="submit">
               Submit
             </Button>
           </Form>
