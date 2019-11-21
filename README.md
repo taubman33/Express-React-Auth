@@ -157,6 +157,23 @@ module.exports = (req, res, next) => {
 }
 ```
 
+The "restricted" routes are expecting a JSON Web Token (JWT) sent with the request from the client. We want to configure the client so that once the user is signed in, that every request to the API server includes a JSON Web Token (JWT).
+
+The web standard is to send the JWT in the header of the HTTP request.
+
+client/src/services/apiConfig.js
+```js
+const JwtToken = localStorage.getItem('token') || null
+
+const api = Axios.create({
+	baseURL: apiUrl,
+	headers: {
+		Authorization: `Bearer ${JwtToken}`,
+		'Access-Control-Allow-Origin': '*'
+	}
+})
+```
+
 ## Bonus
 
 Build out functionality for a Change Password feature
