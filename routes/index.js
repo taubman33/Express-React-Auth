@@ -11,8 +11,8 @@ router.post('/change-password', controllers.changePassword)
 
 router.get('/items', controllers.getAllItems)
 router.get('/items/:id', controllers.getItemById)
-router.post('/items', restrict, controllers.createItem)
-router.put('/items/:id', restrict, controllers.updateItem)
-router.delete('/items/:id', restrict, controllers.deleteItem)
+// Add POST route for /items
+// Add PUT route for /items/:id
+// Add DELETE route for /items/:id
 
 module.exports = router

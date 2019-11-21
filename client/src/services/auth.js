@@ -1,23 +1,13 @@
 import api from './apiConfig'
 
 export const signUp = async credentials => {
-  try {
-    const resp = await api.post('/sign-up', credentials)
-    localStorage.setItem('token', resp.data.token)
-    return resp.data
-  } catch (error) {
-    throw error
-  }
+  // Create an Axios POST call to the /sign-up route on the server include the user credentials in the request body
+  // Store the server's response, which will be a JSON Web Token (JWT) unique to that user, in localStorage
 }
 
 export const signInUser = async credentials => {
-  try {
-    const resp = await api.post('/sign-in', credentials)
-    localStorage.setItem('token', resp.data.token)
-    return resp.data
-  } catch (error) {
-    throw error
-  }
+  // Create an Axios POST call to the /sign-in route on the server include the user credentials in the request body
+  // Store the server's response, which will be a JSON Web Token (JWT) unique to that user, in localStorage
 }
 
 export const signOut = async user => {
@@ -31,6 +21,7 @@ export const signOut = async user => {
 
 export const changePassword = async (passwords, user) => {
   try {
+    // Bonus
     const resp = await api.post('/')
     return resp.data
   } catch (error) {

@@ -1,6 +1,6 @@
 import Axios from 'axios'
 
-const JwtToken = localStorage.getItem('token') || null
+// Grab the JSON Web Token (JWT) from localStorage and set to a variable so we can send the token in the HTTP Header
 
 let apiUrl
 
@@ -17,10 +17,7 @@ if (window.location.hostname === 'localhost') {
 
 const api = Axios.create({
 	baseURL: apiUrl,
-	headers: {
-		Authorization: `Bearer ${JwtToken}`,
-		'Access-Control-Allow-Origin': '*'
-	}
+	// Configure the HTTP Header so we include the JWT
 })
 
 export default api
