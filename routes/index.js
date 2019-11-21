@@ -1,13 +1,18 @@
-const { Router } = require('express');
+const { Router } = require('express')
 const controllers = require('../controllers')
-const router = Router();
+const router = Router()
+const restrict = require('../helpers')
 
 router.get('/', (req, res) => res.send('This is root!'))
 
+router.post('/sign-up', controllers.signUp)
+router.post('/sign-in', controllers.signIn)
+router.post('/change-password', controllers.changePassword)
+
 router.get('/items', controllers.getAllItems)
 router.get('/items/:id', controllers.getItemById)
-router.post('/items', controllers.createItem)
-router.put('/items/:id', controllers.updateItem)
-router.delete('/items/:id', controllers.deleteItem)
+// Add POST route for /items
+// Add PUT route for /items/:id
+// Add DELETE route for /items/:id
 
-module.exports = router;
+module.exports = router
