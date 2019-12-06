@@ -11,6 +11,13 @@
 cd express-react-authentication-exercise
 ```
 
+```sh
+npx sequelize-cli db:create
+npx sequelize-cli db:migrate
+npx sequelize-cli db:seed:all
+```
+
+
 ## Sign Up
 
 Let's create an axios POST request sending the user credentials. The server will respond with the JSON Web Token (JWT) which we will store in localStorage for subsequent requests.
@@ -148,7 +155,7 @@ module.exports = (req, res, next) => {
 	try {
 		const token = req.headers.authorization.split(' ')[1]
 		const data = jwt.verify(token, TOKEN_KEY)
-		res.locals.user = data
+		// res.locals.user = data Used for assigning an item to a user, we won't be using this for this excercise
 		next()
 	} catch (error) {
 		console.log(error)
