@@ -13,6 +13,10 @@ export default class Container extends Component {
   }
 
   async componentDidMount() {
+    this.fetchItems()
+  }
+
+  fetchItems = async () => {
     try {
       const items = await getItems()
       this.setState({ items })
@@ -34,6 +38,7 @@ export default class Container extends Component {
         <Header user={user} />
         <main className="container">
           <Routes
+            getItems={this.fetchItems}
             items={items}
             user={user}
             setUser={this.setUser}

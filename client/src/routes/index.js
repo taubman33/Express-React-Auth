@@ -10,12 +10,12 @@ import Items from '../screens/Items'
 import ItemCreate from '../screens/ItemCreate'
 import ItemEdit from '../screens/ItemEdit'
 import AuthenticatedRoute from './AuthenticatedRoute'
-const Routes = ({ user, items, setUser, clearUser, addItem }) => (
+const Routes = ({ user, setUser, clearUser, addItem, getItems }) => (
   <Switch>
     <Route
       exact
       path="/"
-      render={props => (user ? <Home /> : <Landing {...props} items={items} />)}
+      render={props => (user ? <Home /> : <Landing {...props} />)}
     />
     <Route
       path="/sign-in"
@@ -34,18 +34,20 @@ const Routes = ({ user, items, setUser, clearUser, addItem }) => (
       exact
       path="/items"
       user={user}
-      render={props => <Items {...props} user={user} items={items} />}
+      render={props => <Items {...props} user={user} />}
     />
     <AuthenticatedRoute
       exact
       path="/items/:id"
       user={user}
+      getItems={getItems}
       render={props => <Item {...props} />}
     />
     <AuthenticatedRoute
       exact
       user={user}
       path="/items/:id/edit"
+      getItems={getItems}
       render={props => <ItemEdit {...props} />}
     />
     <AuthenticatedRoute

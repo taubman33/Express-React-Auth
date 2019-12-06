@@ -17,6 +17,7 @@ class ItemEdit extends Component {
   }
 
   async componentDidMount() {
+    console.log(this.props)
     try {
       const item = await getItemById(this.props.match.params.id)
       this.setState({ item })
@@ -36,7 +37,7 @@ class ItemEdit extends Component {
   handleSubmit = event => {
     event.preventDefault()
 
-    updateItem(this.props.match.params.id)
+    updateItem(this.props.match.params.id, { item: { ...this.state.item } })
       .then(() => this.setState({ updated: true }))
       .catch(console.error)
   }
