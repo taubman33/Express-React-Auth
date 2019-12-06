@@ -52,12 +52,13 @@ export default class Items extends Component {
     }
   }
   render() {
-    const { user, items } = this.props
+    const { user } = this.props
+    const { items } = this.state
     if (user) {
       return (
         <Layout>
           <h4>Items</h4>
-          {!items ? <h3>No Items at this time.</h3> : null}
+          {!items.length ? <h3>No Items at this time.</h3> : null}
           <div className="item-container">{this.renderItems()}</div>
         </Layout>
       )
