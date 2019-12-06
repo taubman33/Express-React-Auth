@@ -53,6 +53,7 @@ class ItemEdit extends Component {
       <>
         <ItemForm
           item={item}
+          history={this.props.history}
           handleChange={handleChange}
           handleSubmit={handleSubmit}
           cancelPath={`/items/${this.props.match.params.id}`}
